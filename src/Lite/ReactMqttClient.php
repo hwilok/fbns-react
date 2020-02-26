@@ -13,6 +13,7 @@ namespace Fbns\Client\Lite;
 use BinSoul\Net\Mqtt\DefaultConnection;
 use BinSoul\Net\Mqtt\DefaultIdentifierGenerator;
 use BinSoul\Net\Mqtt\DefaultMessage;
+use BinSoul\Net\Mqtt\DefaultPacketFactory;
 use BinSoul\Net\Mqtt\Flow;
 use BinSoul\Net\Mqtt\Flow\IncomingPublishFlow;
 use BinSoul\Net\Mqtt\Flow\OutgoingDisconnectFlow;
@@ -435,7 +436,7 @@ class ReactMqttClient extends EventEmitter
                 $this->timer[] = $this->loop->addPeriodicTimer(
                     OutgoingConnectFlow::KEEPALIVE - OutgoingConnectFlow::KEEPALIVE_TIMEOUT,
                     function () {
-                        $this->startFlow(new OutgoingPingFlow());
+                        $this->startFlow(new OutgoingPingFlow(new DefaultPacketFactory()));
                     }
                 );
 
