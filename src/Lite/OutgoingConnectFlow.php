@@ -40,12 +40,12 @@ class OutgoingConnectFlow extends AbstractFlow
         $this->connection = $connection;
     }
 
-    public function getCode()
+    public function getCode(): string
     {
         return 'connect';
     }
 
-    public function start()
+    public function start(): ?Packet
     {
         $packet = new ConnectRequestPacket();
         $packet->setProtocolLevel(self::PROTOCOL_LEVEL);
@@ -57,12 +57,12 @@ class OutgoingConnectFlow extends AbstractFlow
         return $packet;
     }
 
-    public function accept(Packet $packet)
+    public function accept(Packet $packet): bool
     {
         return $packet->getPacketType() === Packet::TYPE_CONNACK;
     }
 
-    public function next(Packet $packet)
+    public function next(Packet $packet): ?Packet
     {
         /** @var ConnectResponsePacket $packet */
         if ($packet->isSuccess()) {

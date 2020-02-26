@@ -32,7 +32,7 @@ class ConnectRequestPacket extends BasePacket
 
     protected static $packetType = Packet::TYPE_CONNECT;
 
-    public function read(PacketStream $stream)
+    public function read(PacketStream $stream):void
     {
         parent::read($stream);
         $this->assertPacketFlags(0);
@@ -48,7 +48,7 @@ class ConnectRequestPacket extends BasePacket
         $this->payload = $stream->read($payloadLength);
     }
 
-    public function write(PacketStream $stream)
+    public function write(PacketStream $stream):void
     {
         $data = new PacketStream();
 

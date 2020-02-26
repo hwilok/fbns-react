@@ -44,36 +44,36 @@ class ReactFlow implements Flow
         $this->isSilent = $isSilent;
     }
 
-    public function getCode()
+    public function getCode(): string
     {
         return $this->decorated->getCode();
     }
 
-    public function start()
+    public function start(): ?Packet
     {
         $this->packet = $this->decorated->start();
 
         return $this->packet;
     }
 
-    public function accept(Packet $packet)
+    public function accept(Packet $packet): bool
     {
         return $this->decorated->accept($packet);
     }
 
-    public function next(Packet $packet)
+    public function next(Packet $packet): ?Packet
     {
         $this->packet = $this->decorated->next($packet);
 
         return $this->packet;
     }
 
-    public function isFinished()
+    public function isFinished(): bool
     {
         return $this->decorated->isFinished();
     }
 
-    public function isSuccess()
+    public function isSuccess(): bool
     {
         return $this->decorated->isSuccess();
     }
@@ -83,7 +83,7 @@ class ReactFlow implements Flow
         return $this->decorated->getResult();
     }
 
-    public function getErrorMessage()
+    public function getErrorMessage(): string
     {
         return $this->decorated->getErrorMessage();
     }
